@@ -1,0 +1,68 @@
+{
+  "name": "my-electron-app",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "dist/main/main.js",
+  "scripts": {
+    "dev:renderer": "vite --config src/renderer/vite.config.ts",
+    "dev:main": "tsc -p src/main/tsconfig.main.json --watch",
+    "dev:electron": "wait-on http://localhost:5173 && electron .",
+    "dev": "concurrently -k -n RENDERER,MAIN,ELECTRON -c cyan,green,magenta \"npm:dev:renderer\" \"npm:dev:main\" \"npm:dev:electron\"",
+    "build": "tsc -p src/main/tsconfig.main.json && vite build --config src/renderer/vite.config.ts && electron-builder",
+    "rebuild": "electron-rebuild -f"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13",
+    "@vitejs/plugin-react-swc": "^3.10.2",
+    "concurrently": "^9.2.0",
+    "currently": "^0.0.8",
+    "electron": "^37.1.0",
+    "electron-builder": "^26.0.12",
+    "electron-rebuild": "^3.2.9",
+    "typescript": "^5.8.3",
+    "vite": "^7.0.0",
+    "wait-on": "^8.0.3"
+  },
+  "dependencies": {
+    "better-sqlite3": "^12.1.1"
+  },
+  "build": {
+    "appId": "com.seuapp.id",
+    "productName": "MeuApp",
+    "files": [
+      "dist/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "starter.db",
+        "to": "starter.db"
+      }
+    ],
+    "directories": {
+      "buildResources": "assets"
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "assets/icon.ico"
+    },
+    "mac": {
+      "target": [
+        "dmg"
+      ],
+      "icon": "assets/icon.icns"
+    },
+    "linux": {
+      "target": [
+        "AppImage"
+      ],
+      "icon": "assets/icon.png"
+    }
+  }
+}

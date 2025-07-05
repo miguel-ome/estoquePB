@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "CommonJS",
+    "outDir": "../../dist/main", // ← sobe dois níveis
+    "rootDir": ".", // ← refere-se à própria pasta `src/main`
+    "strict": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "baseUrl": ".", // base para `paths`, ok
+    "types": ["electron"] // importa tipagens do Electron
+  },
+  "include": ["."]
+}
