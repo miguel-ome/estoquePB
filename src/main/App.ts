@@ -20,10 +20,9 @@ export class App {
 
   private createWindow(): void {
     const win = new BrowserWindow({
-      width: 800,
-      height: 600,
+      fullscreen: true,
       webPreferences: {
-        preload: path.join(__dirname, "preload.js"), // se usar preload
+        preload: path.join(__dirname, "preload.js"),
         nodeIntegration: true,
         contextIsolation: true,
       },
@@ -45,5 +44,8 @@ export class App {
   private routes(): void {
     // Cities
     ipcMain.handle("getAllCities", () => GetAllCitiesUseCase.execute());
+
+    // App quit
+    ipcMain.handle("appQuit", () => app.quit());
   }
 }

@@ -5,7 +5,11 @@ export {};
 declare global {
   interface Window {
     api: {
+      // Cities
       getAllCities: () => Promise<ICity[]>;
+
+      // App
+      appQuit: () => void;
     };
   }
 }

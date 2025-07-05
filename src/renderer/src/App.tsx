@@ -1,16 +1,13 @@
-import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Home } from "./pages/Home";
 
 function App() {
-  const handleAction = async () => {
-    const response = await window.api.getAllCities();
-    console.log(response);
-  };
-
   return (
-    <div>
-      <h1>Olá mundo</h1>
-      <button onClick={handleAction}>Ação</button>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
