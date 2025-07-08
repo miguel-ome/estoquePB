@@ -1,16 +1,20 @@
 import type { ICity } from "../interfaces/ICity";
 import type { IRoute } from "../interfaces/IRoute";
 
+// Types (responses)
+import type { IGetAllCities } from "./cities/IGetAllCities";
+import type { IGetAllRoutes } from "./routes/IGetAllRoutes";
+
 export {};
 
 declare global {
   interface Window {
     api: {
       // Cities
-      getAllCities: () => Promise<ICity[]>;
+      getAllCities: () => Promise<IGetAllCities>;
 
       // Routes
-      getAllRoutes: () => Promise<IRoute[]>;
+      getAllRoutes: () => Promise<IGetAllRoutes>;
 
       // App
       appQuit: () => void;

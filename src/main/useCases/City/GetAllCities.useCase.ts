@@ -1,11 +1,12 @@
 import { NotFoundError } from "../../error/NotFoundError";
 import { City } from "../../models/City";
 import { CityRepository } from "../../repository/City.repository";
+import { CityMapper, ICityMapper } from "../../mapper/City.mapper";
 
 interface GetAllCitiesUseCaseResponse {
   code: number;
   message: string;
-  body?: City[];
+  body?: ICityMapper[];
 }
 
 export class GetAllCitiesUseCase {
@@ -17,7 +18,7 @@ export class GetAllCitiesUseCase {
       return {
         code: 200,
         message: "Requisição realizada com sucesso",
-        body: cities,
+        body: cities.map((city) => CityMapper.toRenderer(city)),
       };
     } catch (error) {
       if (error instanceof NotFoundError) {

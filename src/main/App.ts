@@ -49,6 +49,8 @@ export class App {
     // Routes
     ipcMain.handle("getAllRoutes", () => GetAllRoutesUseCase.execute());
 
+    // Notes
+
     // App quit
     ipcMain.handle("appQuit", () => app.quit());
   }

@@ -3,10 +3,11 @@ form {
   padding: 2rem;
   border-radius: 12px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  max-width: 500px;
+  width: 700px;
   margin: auto;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
   gap: 1.5rem;
 }
 
@@ -17,31 +18,38 @@ label {
 }
 
 input {
-  padding: 0.7rem 1rem;
+  padding: 0.5rem 1rem;
   margin-top: 0.3rem;
   border: 1px solid var(--color--border);
   border-radius: 8px;
   background-color: var(--color--input-bg);
   color: var(--color--text);
+  font-size: 1rem;
 }
 
 input:focus {
-  outline: 2px solid var(--color--primary);
+  outline: 1px solid var(--color--primary);
 }
 
-button {
-  padding: 0.8rem 1rem;
-  background-color: var(--color--primary);
-  color: var(--color--bg);
-  font-weight: bold;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: 0.3s;
+select {
+  background-color: var(--color--input-bg);
+  color: #ffffff;
+  border: 1px solid #444;
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  transition: border 0.2s, background-color 0.2s;
 }
 
-button:hover {
-  background-color: #5f90c2;
+select:focus {
+  outline: none;
+  border-color: var(--color--primary);
+  background-color: #1f1f1f;
+}
+
+option {
+  background-color: #2c2c2c;
+  color: #ffffff;
 }
 
 p {

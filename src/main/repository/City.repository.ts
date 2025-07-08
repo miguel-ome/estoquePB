@@ -17,7 +17,7 @@ export class CityRepository extends Repository {
       throw new NotFoundError("Erro na busca dos registro da tabela cities");
     }
 
-    const cities = response.map((city) => {
+    return response.map((city) => {
       return new City({
         code: city.code,
         id: city.id,
@@ -25,7 +25,22 @@ export class CityRepository extends Repository {
         uf: city.uf,
       });
     });
+  }
 
-    return cities;
+  public getCityById(id: number): City {
+    const responseCity = this.db
+      .prepare("SELECT * FROM cities WHERE id = ?")
+      .get(id) as CityRow;
+
+    if (!responseCity) {
+      throw new NotFoundError("Cidade não existe");
+    }
+
+    return new City({
+      id: responseCity.id,
+      code: responseCity.code,
+      name: responseCity.name,
+      uf: responseCity.uf,
+    });
   }
 }

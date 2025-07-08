@@ -38,6 +38,7 @@
 
 .button-logout {
   background-color: var(--color--error);
+  color: var(--text);
 }
 
 .button-logout:hover {

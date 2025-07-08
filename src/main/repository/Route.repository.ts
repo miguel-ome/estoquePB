@@ -30,4 +30,22 @@ export class RouteRepository extends Repository {
 
     return routes;
   }
+
+  public getRouteById(id: number): Route {
+    const responseRoute = this.db
+      .prepare("SELECT * FROM routes WHERE id = ?")
+      .get(id) as RouteRow;
+
+    if (!responseRoute) {
+      throw new NotFoundError("Route não existe");
+    }
+
+    return new Route(
+      {
+        name: responseRoute.name,
+        description: responseRoute.description,
+      },
+      responseRoute.id
+    );
+  }
 }

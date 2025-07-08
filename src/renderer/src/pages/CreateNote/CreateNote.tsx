@@ -9,8 +9,23 @@ export function CreateNote() {
       <Sidebar />
 
       <div className="wrapper">
-        <button onClick={() => navigate(-1)}>Voltar</button>
-        <CreateNoteForm />
+        <div className="header">
+          <button className="button-primary" onClick={() => navigate(-1)}>
+            Voltar
+          </button>
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <h1 style={{ marginBottom: "30px" }}>Criar Nota</h1>
+          <CreateNoteForm />
+        </div>
       </div>
     </div>
   );

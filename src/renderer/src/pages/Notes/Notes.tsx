@@ -1,6 +1,6 @@
-import "./Notes.css";
 import { Link } from "react-router-dom";
 import { Sidebar } from "../../components/menu/Sidebar";
+import { IoCreateOutline } from "react-icons/io5";
 
 const data = [
   {
@@ -30,8 +30,13 @@ export function Notes() {
 
       <div className="wrapper">
         <div className="header">
-          <Link to="/create-note" className="button-primary">
-            + Cadastrar Nota
+          <Link
+            to="/create-note"
+            className="button-primary"
+            style={{ display: "flex", alignItems: "center" }}
+          >
+            <IoCreateOutline size={20} />
+            Cadastrar Nota
           </Link>
         </div>
 
