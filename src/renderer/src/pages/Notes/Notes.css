@@ -1,0 +1,49 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.button-primary {
+  background-color: var(--color--primary);
+  color: var(--color--bg);
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.button-primary:hover {
+  background-color: #5f90c2;
+}
+
+.table-container {
+  overflow-x: auto;
+  border-radius: 4px;
+}
+
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--color--bg-secondary);
+  color: var(--color--text);
+  border: 1px solid var(--color--border);
+  border-radius: 4px;
+}
+
+.styled-table th,
+.styled-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--color--border);
+}
+
+.styled-table th {
+  background-color: #222;
+}
+
+.styled-table tr:hover {
+  background-color: #1a1a1a;
+}

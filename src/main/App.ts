@@ -3,6 +3,7 @@ import path from "path";
 import { app, BrowserWindow, ipcMain } from "electron";
 import { Database } from "better-sqlite3";
 import { GetAllCitiesUseCase } from "./useCases/City/GetAllCities.useCase";
+import { GetAllRoutesUseCase } from "./useCases/Route/GetAllRoutes.useCase";
 
 export class App {
   private db: Database;
@@ -44,6 +45,9 @@ export class App {
   private routes(): void {
     // Cities
     ipcMain.handle("getAllCities", () => GetAllCitiesUseCase.execute());
+
+    // Routes
+    ipcMain.handle("getAllRoutes", () => GetAllRoutesUseCase.execute());
 
     // App quit
     ipcMain.handle("appQuit", () => app.quit());
