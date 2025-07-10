@@ -2,9 +2,16 @@ import path from "path";
 
 import { app, BrowserWindow, ipcMain } from "electron";
 import { Database } from "better-sqlite3";
+
+// Cities
 import { GetAllCitiesUseCase } from "./useCases/City/GetAllCities.useCase";
+
+// Routes
 import { GetAllRoutesUseCase } from "./useCases/Route/GetAllRoutes.useCase";
+
+// Notes
 import { SaveNoteUseCase } from "./useCases/Note/SaveNote.useCase";
+import { GetAllNotesUseCase } from "./useCases/Note/GetAllNotes.useCase";
 
 export class App {
   private db: Database;
@@ -54,6 +61,7 @@ export class App {
     ipcMain.handle("saveNote", (event, props) =>
       SaveNoteUseCase.execute(props)
     );
+    ipcMain.handle("getAllNotes", () => GetAllNotesUseCase.execute());
 
     // App quit
     ipcMain.handle("appQuit", () => app.quit());

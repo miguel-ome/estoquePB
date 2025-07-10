@@ -9,6 +9,7 @@ contextBridge.exposeInMainWorld("api", {
 
   // Notes
   saveNote: (props) => ipcRenderer.invoke("saveNote", props),
+  getAllNotes: () => ipcRenderer.invoke("getAllNotes"),
 
   // App
   appQuit: () => ipcRenderer.invoke("appQuit"),

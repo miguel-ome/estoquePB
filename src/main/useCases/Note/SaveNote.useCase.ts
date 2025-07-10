@@ -1,9 +1,11 @@
 import { NotFoundError } from "../../error/NotFoundError";
+import { UnprocessableEntity } from "../../error/UnprocessableEntityError";
 import { IRouteMapper, RouteMapper } from "../../mapper/Route.mapper";
 import { Note } from "../../models/Note";
 import { NoteRepository } from "../../repository/Note.repository";
 import { RouteRepository } from "../../repository/Route.repository";
 import { CityRepository } from "../../repository/City.repository";
+import { InternalServerError } from "../../error/InternalServerError";
 
 interface SaveNoteUseCaseRequest {
   numberNote: number;
@@ -54,13 +56,11 @@ export class SaveNoteUseCase {
         message: "Requisição realizada com sucesso",
       };
     } catch (error) {
-      if (error instanceof NotFoundError) {
+      if (error instanceof UnprocessableEntity || InternalServerError)
         return {
           code: error.code,
           message: error.message,
         };
-      }
-
       return {
         code: 500,
         message: "Erro de sistema interno",

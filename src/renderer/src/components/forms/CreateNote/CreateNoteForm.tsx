@@ -2,11 +2,12 @@ import "./CreateNoteForm.css";
 
 import { useForm } from "react-hook-form";
 // import { zodResolver } from "@hookform/resolvers/zod";
-import { type NoteSchema } from "../../../schemas/NoteSchema";
+import { noteSchema, type NoteSchema } from "../../../schemas/NoteSchema";
 import { useState, useEffect } from "react";
 
 import type { IRoute } from "../../../interfaces/IRoute";
 import type { ICity } from "../../../interfaces/ICity";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export function CreateNoteForm() {
   const [routes, setRoutes] = useState<IRoute[]>();
@@ -18,16 +19,21 @@ export function CreateNoteForm() {
       const responseCities = await window.api.getAllCities();
 
       // Validation response routes
-      if (responseRoutes.code < 200 && responseRoutes.code > 299)
+      if (
+        responseRoutes.code < 200 ||
+        responseRoutes.code > 299 ||
+        responseRoutes.body?.length === 0
+      )
         alert(responseRoutes.message);
-      if (responseRoutes.body?.length === 0) alert(responseRoutes.message);
       setRoutes(responseRoutes.body);
 
       // Validation response cities
-      if (responseCities.code < 200 && responseCities.code > 299)
+      if (
+        responseCities.code < 200 ||
+        responseCities.code > 299 ||
+        responseCities.body?.length === 0
+      )
         alert(responseCities.message);
-      if (responseCities.body?.length === 0) alert(responseCities.message);
-      console.log(responseCities.body);
 
       setCities(responseCities.body);
     }
@@ -40,22 +46,11 @@ export function CreateNoteForm() {
     handleSubmit,
     formState: { errors },
   } = useForm<NoteSchema>({
-    // resolver: zodResolver(noteSchema),
+    resolver: zodResolver(noteSchema),
   });
 
-  const onSubmit = () => {
-    const noteData: NoteSchema = {
-      checker: "Marciel",
-      cityId: 2692,
-      client: "Eliseu Miguel",
-      emissionDate: new Date(),
-      numberNote: 124578,
-      routeId: "ef0c58ac-5b5c-490b-8092-eb7eec42f6b8",
-      totValue: 1200,
-      volumes: 10,
-      weight: 12,
-    };
-    window.api.saveNote(noteData);
+  const onSubmit = (data: NoteSchema) => {
+    window.api.saveNote(data);
   };
 
   return (

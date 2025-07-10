@@ -1,40 +1,24 @@
 import { NotFoundError } from "../../error/NotFoundError";
-import { type INoteMapper, NoteMapper } from "../../mapper/Note.mapper";
-import { Note } from "../../models/Note";
+import { NoteMapper, type INoteMapper } from "../../mapper/Note.mapper";
 import { NoteRepository } from "../../repository/Note.repository";
-import { RouteRepository } from "../../repository/Route.repository";
-import { CityRepository } from "../../repository/City.repository";
 
-interface SaveNoteUseCaseResponse {
+interface GetAllNotesUseCaseResponse {
   code: number;
   message: string;
-  body: INoteMapper[];
+  body?: INoteMapper[];
 }
 
-export class SaveNoteUseCase {
-  static async execute(): Promise<SaveNoteUseCaseResponse> {
+export class GetAllNotesUseCase {
+  static async execute(): Promise<GetAllNotesUseCaseResponse> {
     const noteRepository = new NoteRepository();
 
     try {
-      const note = noteRepository.getAllNotes();
+      const notes = noteRepository.getAllNotes();
 
-      const note = new Note({
-        checker: props.checker,
-        city,
-        client: props.client,
-        emissionDate: props.emissionDate,
-        numberNote: props.numberNote,
-        route,
-        totValue: props.totValue,
-        volumes: props.volumes,
-        weight: props.weight,
-        address: props.address,
-      });
-
-      noteRepository.saveNote(note);
       return {
         code: 200,
-        message: "Requisição realizada com sucesso",
+        message: "Requisição realizada com sucesso !",
+        body: notes.map((note) => NoteMapper.toRenderer(note)),
       };
     } catch (error) {
       if (error instanceof NotFoundError) {
@@ -42,12 +26,12 @@ export class SaveNoteUseCase {
           code: error.code,
           message: error.message,
         };
+      } else {
+        return {
+          code: 500,
+          message: "Erro de sistema interno",
+        };
       }
-
-      return {
-        code: 500,
-        message: "Erro de sistema interno",
-      };
     }
   }
 }
