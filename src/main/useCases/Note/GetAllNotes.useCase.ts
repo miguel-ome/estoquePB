@@ -1,39 +1,22 @@
 import { NotFoundError } from "../../error/NotFoundError";
-import { IRouteMapper, RouteMapper } from "../../mapper/Route.mapper";
+import { type INoteMapper, NoteMapper } from "../../mapper/Note.mapper";
 import { Note } from "../../models/Note";
 import { NoteRepository } from "../../repository/Note.repository";
 import { RouteRepository } from "../../repository/Route.repository";
 import { CityRepository } from "../../repository/City.repository";
 
-interface SaveNoteUseCaseRequest {
-  numberNote: number;
-  client: string;
-  emissionDate: Date;
-  address?: string;
-  cityId: number;
-  routeId: string;
-  volumes: number;
-  totValue: number;
-  weight: number;
-  checker: string;
-}
-
 interface SaveNoteUseCaseResponse {
   code: number;
   message: string;
+  body: INoteMapper[];
 }
 
 export class SaveNoteUseCase {
-  static async execute(
-    props: SaveNoteUseCaseRequest
-  ): Promise<SaveNoteUseCaseResponse> {
+  static async execute(): Promise<SaveNoteUseCaseResponse> {
     const noteRepository = new NoteRepository();
-    const routeRepository = new RouteRepository();
-    const cityRepository = new CityRepository();
 
     try {
-      const route = routeRepository.getRouteById(props.routeId);
-      const city = cityRepository.getCityById(props.cityId);
+      const note = noteRepository.getAllNotes();
 
       const note = new Note({
         checker: props.checker,

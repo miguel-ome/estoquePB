@@ -16,6 +16,9 @@ declare global {
       // Routes
       getAllRoutes: () => Promise<IGetAllRoutes>;
 
+      // Notes
+      saveNote: (props) => Promise<void>;
+
       // App
       appQuit: () => void;
     };

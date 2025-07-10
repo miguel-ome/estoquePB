@@ -10,7 +10,6 @@ interface GetAllRoutesUseCaseResponse {
 
 export class GetAllRoutesUseCase {
   static async execute(): Promise<GetAllRoutesUseCaseResponse> {
-    console.log("Aqui");
     const routeRepository = new RouteRepository();
 
     try {

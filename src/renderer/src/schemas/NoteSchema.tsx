@@ -6,9 +6,9 @@ export const noteSchema = z.object({
   emissionDate: z.coerce.date({
     errorMap: () => ({ message: "Data inválida" }),
   }),
-  address: z.string(),
-  city: z.string().min(1, "Cidade obrigatória"),
-  route: z.coerce.string().min(1, "Rota obrigatório"),
+  address: z.string().optional(),
+  cityId: z.coerce.number().min(1, "Cidade obrigatória"),
+  routeId: z.coerce.string().min(1, "Rota obrigatório"),
   volumes: z.coerce.number().min(1, "Volume obrigatório"),
   checker: z.string().min(1, "Conferente obrigatório"),
   totValue: z.coerce.number().min(0.01, "Valor total obrigatório"),

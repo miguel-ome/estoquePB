@@ -7,6 +7,9 @@ contextBridge.exposeInMainWorld("api", {
   // Routes
   getAllRoutes: () => ipcRenderer.invoke("getAllRoutes"),
 
+  // Notes
+  saveNote: (props) => ipcRenderer.invoke("saveNote", props),
+
   // App
   appQuit: () => ipcRenderer.invoke("appQuit"),
 });

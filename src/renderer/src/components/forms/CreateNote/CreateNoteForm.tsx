@@ -1,8 +1,8 @@
 import "./CreateNoteForm.css";
 
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { noteSchema, type NoteSchema } from "../../../schemas/NoteSchema";
+// import { zodResolver } from "@hookform/resolvers/zod";
+import { type NoteSchema } from "../../../schemas/NoteSchema";
 import { useState, useEffect } from "react";
 
 import type { IRoute } from "../../../interfaces/IRoute";
@@ -40,11 +40,22 @@ export function CreateNoteForm() {
     handleSubmit,
     formState: { errors },
   } = useForm<NoteSchema>({
-    resolver: zodResolver(noteSchema),
+    // resolver: zodResolver(noteSchema),
   });
 
-  const onSubmit = (data: NoteSchema) => {
-    console.log("Formulário enviado:", data);
+  const onSubmit = () => {
+    const noteData: NoteSchema = {
+      checker: "Marciel",
+      cityId: 2692,
+      client: "Eliseu Miguel",
+      emissionDate: new Date(),
+      numberNote: 124578,
+      routeId: "ef0c58ac-5b5c-490b-8092-eb7eec42f6b8",
+      totValue: 1200,
+      volumes: 10,
+      weight: 12,
+    };
+    window.api.saveNote(noteData);
   };
 
   return (
@@ -78,7 +89,7 @@ export function CreateNoteForm() {
 
       <label style={{ width: "42%" }}>
         Cidade:
-        <select {...register("city")}>
+        <select {...register("cityId")}>
           <option value="">Selecione a cidade...</option>
           {cities?.map((city) => (
             <option value={city.id}>
@@ -86,18 +97,18 @@ export function CreateNoteForm() {
             </option>
           ))}
         </select>
-        {errors.city && <p>{errors.city.message}</p>}
+        {errors.cityId && <p>{errors.cityId.message}</p>}
       </label>
 
       <label style={{ width: "35%" }}>
         Rota:
-        <select {...register("route")}>
+        <select {...register("routeId")}>
           <option value="">Selecione a rota...</option>
           {routes?.map((route) => (
             <option value={route.id}>{route.name}</option>
           ))}
         </select>
-        {errors.route && <p>{errors.route.message}</p>}
+        {errors.routeId && <p>{errors.routeId.message}</p>}
       </label>
 
       <label style={{ width: "15%" }}>

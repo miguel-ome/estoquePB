@@ -14,7 +14,7 @@ export class CityRepository extends Repository {
     const response = this.db.prepare("SELECT * FROM cities").all() as CityRow[];
 
     if (response.length == 0) {
-      throw new NotFoundError("Erro na busca dos registro da tabela cities");
+      throw new NotFoundError("Nenhum registro encontrado");
     }
 
     return response.map((city) => {
