@@ -20,6 +20,8 @@ declare global {
       // Notes
       saveNote: (props) => Promise<void>;
       getAllNotes: () => Promise<IGetAllNotes>;
+      deleteManyNotes: (ids: string[]) => Promise<void>;
+      deleteNoteById: (id) => Promise<void>;
 
       // App
       appQuit: () => void;

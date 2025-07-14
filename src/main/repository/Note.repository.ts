@@ -144,4 +144,24 @@ export class NoteRepository extends Repository {
         )
     );
   }
+
+  public deleteNoteById(id: string): void {
+    const stmt = this.db.prepare("DELETE FROM notes WHERE id = ?");
+    const info = stmt.run(id);
+
+    if (info.changes === 0) {
+      throw new NotFoundError("Nota não encontrada ou já foi removida.");
+    }
+  }
+
+  public deleteManyNotes(notesToDelete: string[]): void {
+    const placeholders = notesToDelete.map(() => "?").join(", ");
+    const stmt = this.db.prepare(
+      `DELETE FROM notes WHERE id IN (${placeholders})`
+    );
+    const info = stmt.run(...notesToDelete);
+
+    if (info.changes === 0)
+      throw new NotFoundError("Notas não encontradas ou já foram removidas");
+  }
 }

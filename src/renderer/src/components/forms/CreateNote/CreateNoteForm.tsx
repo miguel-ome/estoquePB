@@ -1,17 +1,18 @@
 import "./CreateNoteForm.css";
 
 import { useForm } from "react-hook-form";
-// import { zodResolver } from "@hookform/resolvers/zod";
 import { noteSchema, type NoteSchema } from "../../../schemas/NoteSchema";
 import { useState, useEffect } from "react";
 
 import type { IRoute } from "../../../interfaces/IRoute";
 import type { ICity } from "../../../interfaces/ICity";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useNavigate } from "react-router-dom";
 
 export function CreateNoteForm() {
   const [routes, setRoutes] = useState<IRoute[]>();
   const [cities, setCities] = useState<ICity[]>();
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchDataCitiesAndRoutes() {
@@ -51,6 +52,8 @@ export function CreateNoteForm() {
 
   const onSubmit = (data: NoteSchema) => {
     window.api.saveNote(data);
+
+    navigate("/notes");
   };
 
   return (

@@ -12,6 +12,8 @@ import { GetAllRoutesUseCase } from "./useCases/Route/GetAllRoutes.useCase";
 // Notes
 import { SaveNoteUseCase } from "./useCases/Note/SaveNote.useCase";
 import { GetAllNotesUseCase } from "./useCases/Note/GetAllNotes.useCase";
+import { DeleteManyNotesByIdUseCase } from "./useCases/Note/DeleteManyNotesById";
+import { DeleteNoteByIdUseCase } from "./useCases/Note/DeleteNotesById";
 
 export class App {
   private db: Database;
@@ -62,6 +64,12 @@ export class App {
       SaveNoteUseCase.execute(props)
     );
     ipcMain.handle("getAllNotes", () => GetAllNotesUseCase.execute());
+    ipcMain.handle("deleteManyNotes", (_event, ids: string[]) =>
+      DeleteManyNotesByIdUseCase.execute({ ids })
+    );
+    ipcMain.handle("deleteNoteById", (_event, id: string) =>
+      DeleteNoteByIdUseCase.execute({ id })
+    );
 
     // App quit
     ipcMain.handle("appQuit", () => app.quit());
