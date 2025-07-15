@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import { CreateNoteForm } from "../../components/forms/CreateNote/CreateNoteForm";
-import { Sidebar } from "../../components/menu/Sidebar";
+import { CreateNoteForm } from "../../../components/forms/CreateNote/CreateNoteForm";
+import { Sidebar } from "../../../components/menu/Sidebar";
 
-export function CreateNote() {
+export function RegisterNote() {
   const navigate = useNavigate();
   return (
     <div className="container">
@@ -23,7 +23,7 @@ export function CreateNote() {
             alignItems: "center",
           }}
         >
-          <h1 style={{ marginBottom: "30px" }}>Criar Nota</h1>
+          <h1 style={{ marginBottom: "30px" }}>"Salvar Nota"</h1>
           <CreateNoteForm />
         </div>
       </div>

@@ -1,0 +1,8 @@
+.button-edit {
+  color: var(--color--text);
+}
+
+.button-edit:hover {
+  color: var(--color--primary);
+  transition: 0.2s;
+}

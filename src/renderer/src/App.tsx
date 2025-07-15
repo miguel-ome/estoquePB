@@ -1,16 +1,21 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Notes } from "./pages/Notes/Notes";
-import { CreateNote } from "./pages/CreateNote/CreateNote";
+import { RegisterNote } from "./pages/Notes/Register/RegisterNote";
 import { RoutesPage } from "./pages/Routes/Routes";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Notes />} />
-        <Route path="/create-note" element={<CreateNote />} />
-        <Route path="/routes" element={<RoutesPage />} />
+        {/* Deixe apenas um Notes principal */}
         <Route path="/notes" element={<Notes />} />
+        <Route path="/nota/register/:id" element={<RegisterNote />} />
+
+        {/* Outras rotas */}
+        <Route path="/routes" element={<RoutesPage />} />
+
+        {/* Redirecionar / para /notes */}
+        <Route path="/" element={<Notes />} />
       </Routes>
     </BrowserRouter>
   );
